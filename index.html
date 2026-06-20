@@ -1,1021 +1,3025 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link rel="stylesheet" href="./src/css/app.css" />
+    <!-- remix icon -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Vite App</title>
-   <link rel="stylesheet" href="./src/css/app.css" />
-   <!-- remix icon -->
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
-
-</head>
-
-<body>
-   <header
-      class="flex justify-between items-center gap-4 p-5 bg-[#79614f] fixed top-0 left-0 z-[100]  w-full text-white ">
-      <!-- logo -->
-      <div class="text-xl font-bold">MADKHAL</div>
-      <!-- navbar -->
-      <nav class="hidden md:flex md:items-center md:gap-4">
-         <a href="">COURSES</a>
-         <a href="">INFOGRAPICS</a>
-         <a href="">ABOUT</a>
-         <a href="">SUBSCRIPTION</a>
-         <a href="">LEARN</a>
-         <a href="">FAVORITES</a>
-      </nav>
-
-      <!-- user desktop -->
-      <div id="userDesktop" class=" hidden md:flex  md:items-center md:gap-3">
-
-         <!-- icon notif -->
-         <div class="flex justify-center items-center relative mr-2">
-            <i class="ri-notification-line text-2xl"></i>
-            <span
-               class="bg-red-500 rounded-xl flex justify-center items-center px-2 absolute -top-1 -right-3 shadow text-sm">34</span>
-         </div>
-
-         <!-- avatar -->
-         <div class="flex justify-center items-center bg-[#f4e6db] rounded-full h-7 w-7">
-            <i class="ri-user-line text-[#adb5bd]"></i>
-         </div>
-         <!-- name -->
-         <div class="flex-col items-center gap-3">
-            <p class="text-lg px-2 ">Jhon Doe</p>
-            <span class="bg-white rounded-lg flex items-center justify-center text-sm mb-1 shadow text-black">free
-               member</span>
-         </div>
-         <!-- icon -->
-         <div>
-            <i class="ri-arrow-down-wide-line text-xl"></i>
-         </div>
-      </div>
-      <!-- user desktop setting -->
-      <div id="userDesktopSetting"
-         class="hidden md:flex-col md:justify-center md:space-y-3 md:rounded-lg md:shadow md:bg-white text-[#474443] md: absolute md:top-20 md:right-3 md:mt-4 md:p-3">
-         <!-- profile setting -->
-         <div class="flex items-center gap-1">
-            <i class="ri-settings-5-line text-2xl "></i>
-            <span class="text-xl ">Profile Settings</span>
-         </div>
-         <!-- change pasword -->
-         <div class="flex items-center gap-1">
-            <i class="ri-lock-line text-2xl"></i>
-            <span class="text-xl ">Change Password</span>
-         </div>
-         <!-- logout -->
-         <div id="logoutDesktop" class="flex items-center gap-1">
-            <i class="ri-logout-box-r-line text-2xl ">
-               <span class="text-xl  ">Logout</span></i>
-         </div>
-      </div>
-      <!-- icon menu mobile -->
-      <div id="menuBtn"
-         class="flex justify-center items-center rounded-lg px-3 py-2 shadow border-1 border-white md:hidden">
-         <i class="ri-menu-line text-lg text-white"></i>
-      </div>
-   </header>
-
-   <!-- mobile menu drawer-->
-   <div id="mobileMenu" class="hidden fixed top-0 right-0 w-full h-full bg-white p-4 shadow-lg z-[100] md:hidden">
-
-
-      <!-- USER INFO -->
-      <div class="flex  items-center gap-2 border-b-1 border-b-[#dee2e6]  pb-4 relative">
-         <!-- AVATAR -->
-         <div class="bg-[#f4e6db] rounded-full shadow h-8 w-8 flex items-center justify-center">
-            <i class="ri-user-line text-xl text-[#adb5bd]"></i>
-         </div>
-         <!-- NAMA + STATUS -->
-         <div class="flex-col">
-            <p class=" text-base px-2 text-[#3b2811]">John Doe</p>
-            <span class="text-xs bg-gray-300 px-2 py-0.5 rounded">Free Member</span>
-         </div>
-
-         <!-- CLOSE -->
-         <div class="absolute top-3 right-0">
-            <button id="closeMobileMenu">
-               <i class="ri-close-line text-2xl"></i>
-            </button>
-         </div>
-      </div>
-
-      <!-- MENU LIST -->
-      <ul class="mt-6 space-y-4 text-[#474443]">
-         <li class="flex items-center gap-2 cursor-pointer">
-            <i class="ri-settings-5-line text-2xl "></i>
-            <span class="text-lg">Profile Settings</span>
-         </li>
-         <li class="flex items-center gap-2 cursor-pointer">
-            <i class="ri-lock-line text-2xl"></i>
-            <span class="text-lg">Change Password</span>
-         </li>
-         <li id="logoutMobileBtn" class="flex items-center gap-2 cursor-pointer">
-            <i class="ri-logout-box-r-line text-2xl"></i>
-            <span class="text-lg">Logout</span>
-         </li>
-      </ul>
-
-      <!-- LOGOUT CONFIRM DRAWER (MUNCUL DI DALAM DRAWER) -->
-      <div id="drawerLogoutConfirm" class="hidden mt-10 border-1 border-[#dee2e6] rounded-xl  py-4 px-2">
-         <h2 class="font-bold text-xl mb-5 ">Log Out?</h2>
-         <p class="text-sm text-gray-600 mb-4">You will return to the onboarding page.</p>
-         <div class="flex justify-end gap-2">
-            <button id="cancelDrawerLogout"
-               class="border-1 border-[#a7a19d] px-4 py-2 rounded-full transition-all duration-300 hover:bg-[#3b2811] hover:text-white">Cancel</button>
-            <button class="bg-red-700/85 text-white px-4 py-2 rounded-full">Logout</button>
-         </div>
-      </div>
-
-   </div>
-
-   <!-- mobile menu-end -->
-   <!--modal destop  -->
-   <div id="modalLogoutDesktop"
-      class="hidden fixed inset-0 bg-slate-800 bg-opacity-50 z-[100] flex items-center justify-center">
-      <div class="bg-white p-6 rounded-xl w-[90%] max-w-sm shadow">
-         <h2 class="font-bold text-xl">Log Out?</h2>
-         <p class="text-gray-600 text-sm">You will return to the onboarding page.</p>
-         <div class="flex justify-end gap-2 mt-4">
-            <button id="cancelLogoutDesktop" class="border px-3 py-1 rounded">Cancel</button>
-            <button class="bg-red-600 text-white px-3 py-1 rounded">Logout</button>
-         </div>
-      </div>
-   </div>
-   <!-- modal destop-end -->
-
-
-   <!-- hero section -->
-   <div
-      class="w-full h-screen bg-[url('/images/bg1.jpg')] bg-cover bg-center flex justify-center items-center text-white">
-      <div class="text-center space-y-5 p-3 max-w-xl mx-auto">
-         <h1 class="text-3xl font-bold">welcome to my website</h1>
-         <p class="font-semibold text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi totam nisi
-            cumque cum amet iusto veritatis, quas quis accusamus commodi sapiente voluptates. Distinctio placeat non
-            unde consectetur! Labore, praesentium cupiditate?</p>
-         <a href=""
-            class="inline-block bg-transparent text-white rounded-full shadow-lg px-3 py-2 transition-all duration-300 hover:bg-white/70 mt-2 border border-white hover:text-black hover:border-none">Learn
-            More</a>
-      </div>
-   </div>
-   <!-- card -->
-   <div class="bg-[#817565] py-20">
-      <div class="max-w-7xl mx-auto px-3">
-         <div class="mb-10 ">
-            <h1 class="text-center font-bold text-3xl text-white uppercase">new courses</h1>
-         </div>
-         <!-- swiper card -->
-         <div class="swiper mySwiper  ">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper ">
-               <!-- Slides -->
-               <div class="swiper-slide">
-                  <!-- card wrapper dengan relative di SINI -->
-                  <div class="relative bg-white rounded-xl shadow overflow-hidden">
-
-                     <!-- gambar -->
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded-t-xl">
-
-                     <!-- isi -->
-                     <div class="pt-5 px-3 space-y-3 pb-4">
-                        <p class=" bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3 class="font-semibold">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-
-                     <!-- icon kiri atas -->
-                     <div
-                        class="absolute top-4 left-2 z-10 bg-[#8f1c46] rounded-full flex items-center gap-1 shadow px-2 py-1 text-xs  text-white">
-                        <i class="ri-star-line "></i> Premium
-                     </div>
-
-                     <!-- icon kanan atas -->
-                     <div
-                        class="absolute top-4 right-2 z-10 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center">
-                        <i class="ri-heart-line text-base"></i>
-                     </div>
-
-                  </div>
-               </div>
-               <!-- slide-1-end -->
-               <!-- slide-2 -->
-               <div class="swiper-slide bg-white rounded-xl shadow ">
-                  <!-- img -->
-                  <div class="swiper-slide">
-                     <div class="relative bg-white rounded-xl shadow overflow-hidden">
-                        <img src="/images/bg1.jpg" alt="gambar-1"
-                           class="object-cover object-bottom w-full h-48 rounded shadow">
-
-                        <div class="pt-5 px-3 space-y-3 pb-4">
-                           <p class=" bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                           <h3 class="font-semibold">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                        </div>
-
-                        <div
-                           class="absolute top-4 left-2 z-10 bg-[#8f1c46] rounded-full flex items-center gap-1 shadow px-2 py-1 text-xs text-white">
-                           <i class="ri-star-line"></i>Premium
-                        </div>
-
-                        <div
-                           class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center z-10">
-                           <i class="ri-heart-line"></i>
-                        </div>
-                     </div>
-                  </div>
-                  <!--  -->
-               </div>
-               <!-- 3 -->
-               <div class="swiper-slide">
-                  <div class="relative bg-white rounded-xl shadow overflow-hidden">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-
-                     <div class="pt-5 px-3 space-y-3 pb-4">
-                        <p class=" bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3 class="font-semibold"> Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-
-                     <div
-                        class="absolute top-4 left-2 z-10 bg-[#8f1c46] rounded-full flex items-center gap-1 shadow px-2 py-1 text-xs  text-white">
-                        <i class="ri-star-line"></i>Premium
-                     </div>
-
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center z-10">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-               </div>
-               <!-- 4 -->
-               <div class="swiper-slide">
-                  <div class="relative bg-white rounded-xl shadow overflow-hidden">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-
-                     <div class="pt-5 px-3 space-y-3 pb-4">
-                        <p class=" bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3 class="font-semibold">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-
-                     <div
-                        class="absolute top-4 left-2 z-10 bg-[#8f1c46] rounded-full flex items-center gap-1 shadow px-2 py-1 text-xs  text-white">
-                        <i class="ri-star-line"></i>Premium
-                     </div>
-
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center z-10">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-               </div>
-               <!-- 5 -->
-               <div class="swiper-slide">
-                  <div class="relative bg-white rounded-xl shadow overflow-hidden">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-
-                     <div class="pt-5 px-3 space-y-3 pb-4">
-                        <p class=" bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3 class="font-semibold">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-
-                     <div
-                        class="absolute top-4 left-2 z-10 bg-[#8f1c46] rounded-full flex items-center gap-1 shadow px-2 py-1 text-xs  text-white">
-                        <i class="ri-star-line"></i>Premium
-                     </div>
-
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center z-10">
-                        <i class="ri-heart-line"></i>Premium
-                     </div>
-                  </div>
-               </div>
-               <!-- 6 -->
-               <div class="swiper-slide">
-                  <div class="relative bg-white rounded-xl shadow overflow-hidden">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-
-                     <div class="pt-5 px-3 space-y-3 pb-4">
-                        <p class=" bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3 class="font-semibold">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-
-                     <div
-                        class="absolute top-4 left-2 z-10 bg-[#8f1c46] rounded-full flex items-center gap-1 shadow px-2 py-1 text-xs  text-white">
-                        <i class="ri-star-line">premium</i>
-                     </div>
-
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center z-10">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-               </div>
-               <!-- 6-end -->
-            </div>
-
-            <!-- If we need pagination -->
-            <div class="mt-10 text-black">
-               <div class="swiper-pagination mt-5"></div>
-
-               <!-- If we need navigation buttons -->
-               <div class="swiper-button-prev"></div>
-               <div class="swiper-button-next"></div>
-
-               <!-- If we need scrollbar -->
-               <div class="swiper-scrollbar"></div>
-            </div>
-         </div>
-      </div>
-      <!-- viemore -->
-      <div class="text-center mt-10 bg-[#3b2811] rounded-full shadow  mx-auto w-[120px] px-4 py-2 text-white">view more
-      </div>
-   </div>
-   <!-- end new-courses -->
-   <!-- get premium -->
-   <div class="bg-[#7d5260] py-20">
-      <div class="max-w-7xl mx-auto px-3">
-         <div class="mb-10 ">
-            <h1 class="text-center font-bold text-3xl text-white uppercase">get premium skill</h1>
-         </div>
-         <!-- swiper card -->
-         <div class="swiper mySwiper  ">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper ">
-               <!-- Slides -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3">
-                        <p>4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="bg-[#8f1c46] text-white flex items-center gap-1 rounded-full shadow px-2 py-1 absolute top-4 left-2 text-xs">
-                        <i class="ri-star-line"></i>Premium
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-                  <!--  -->
-               </div>
-               <!-- slide-1-end -->
-               <!-- slide-2 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3">
-                        <p>4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="bg-[#8f1c46] text-white flex items-center gap-1 rounded-full shadow px-2 py-1 absolute top-4 left-2 text-xs">
-                        <i class="ri-star-line"></i>premium
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-                  <!--  -->
-               </div>
-               <!-- 3 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3">
-                        <p>4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="bg-[#8f1c46] text-white flex items-center gap-1 rounded-full shadow px-2 py-1 absolute top-4 left-2 text-xs">
-                        <i class="ri-star-line"></i>premium
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-                  <!--  -->
-               </div>
-               <!-- 4 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3">
-                        <p>4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="bg-[#8f1c46] text-white flex items-center gap-1 rounded-full shadow px-2 py-1 absolute top-4 left-2 text-xs">
-                        <i class="ri-star-line"></i>premium
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-[#8f1c46] text-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-                  <!--  -->
-               </div>
-               <!-- 5 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3">
-                        <p>4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="bg-[#8f1c46] text-white flex items-center gap-1 rounded-full shadow px-2 py-1 absolute top-4 left-2 text-xs">
-                        <i class="ri-star-line"></i>premium
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-                  <!--  -->
-               </div>
-               <!-- 6 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3">
-                        <p>4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="bg-[#8f1c46] text-white flex items-center gap-1 rounded-full shadow px-2 py-1 absolute top-4 left-2 text-xs">
-                        <i class="ri-star-line"></i>premium
-                     </div>
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
-                  </div>
-                  <!--  -->
-               </div>
-               <!-- 6-end -->
-            </div>
-
-            <!-- If we need pagination -->
-            <div class="mt-10 text-black">
-               <div class="swiper-pagination mt-5"></div>
-
-               <!-- If we need navigation buttons -->
-               <div class="swiper-button-prev"></div>
-               <div class="swiper-button-next"></div>
-
-               <!-- If we need scrollbar -->
-               <div class="swiper-scrollbar"></div>
-            </div>
-         </div>
-      </div>
-      <!-- viemore -->
-      <div class="text-center mt-10 bg-[#3b2811] rounded-full shadow text-white  mx-auto w-[120px] px-4 py-2 ">view more
-      </div>
-   </div>
-   <!-- get premium end-->
-   <!-- roadmap -->
-   <div class="bg-[#817565] py-20">
-      <div class="max-w-6xl px-4 mx-auto">
-         <h1 class="text-white font-bold text-3xl text-center mb-10 uppercase">rodmap</h1>
-         <!-- swiper card -->
-         <!-- Slider main container -->
-         <div class="swiper mySwiper relative">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-               <!-- Slides -->
-               <div class="swiper-slide bg-white rounded-xl shadow  ">
-                  <!-- img -->
-                  <img src="/images/bg1.jpg" alt="" class="w-full h-48 object-cover object-bottom rounded-lg shadow">
-                  <div class=" flex flex-col items-center  py-3 px-3 mb-1 space-y-2">
-                     <div class="flex items-center justify-center bg-[#9a806c] text-white w-8 h-8 rounded-full ">1</div>
-                     <p class="text-center">aqidah</p>
-                     <span class="block text-center text-[#817565] ">3 videos</span>
-                  </div>
-                  <p class="text-center py-2 mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                  <div class="flex justify-center mb-3 p-2">
-                     <button class="bg-[#3b2811] text-white rounded-full px-3 py-2 w-full">enroll now</button>
-                  </div>
-                  <hr class="border-1 border-slate-200 mt-2 mb-2">
-                  <div class="px-3 pb-4 mb-4">
-                     <div class="w-full flex justify-between items-center p-3">
-                        <p class="text-[#3b2811]">Lorem ipsum dolor, sit amet consectetur.</p>
-                        <!-- icon -->
-                        <i
-                           class="w-8 h-8 rounded-full bg-transparent text-[#3b2811] border-1 border-[#3b2811]  shadow text-lg ri-arrow-right-wide-fill flex justify-center items-center"></i>
-                     </div>
-                     <!-- progres bar -->
-                     <div class="w-full bg-gray-300 h-1 rounded-full overflow-hidden">
-                        <div class="bg-[#5a3e2b] h-full rounded-full w-[60%]"></div>
-                     </div>
-                  </div>
-               </div>
-               <!-- 1-end -->
-               <div class="swiper-slide bg-white rounded-xl shadow  ">
-                  <!-- img -->
-                  <img src="/images/bg1.jpg" alt="" class="w-full h-48 object-cover object-bottom rounded-lg shadow">
-                  <div class=" flex flex-col items-center  py-3 px-3 mb-1 space-y-2">
-                     <div class="flex items-center justify-center bg-[#9a806c] text-white w-8 h-8 rounded-full ">1</div>
-                     <p class="text-center">aqidah</p>
-                     <span class="block text-center text-[#817565] ">3 videos</span>
-                  </div>
-                  <p class="text-center py-2 mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                  <div class="flex justify-center mb-3 p-2">
-                     <button class="bg-[#3b2811] text-white rounded-full px-3 py-2 w-full">enroll now</button>
-                  </div>
-                  <hr class="border-1 border-slate-200 mt-2 mb-2">
-                  <div class="px-3 pb-4 mb-4">
-                     <div class="w-full flex justify-between items-center p-3">
-                        <p class="text-[#3b2811]">Lorem ipsum dolor, sit amet consectetur.</p>
-                        <!-- icon -->
-                        <i
-                           class="w-8 h-8 rounded-full bg-transparent text-[#3b2811] border-1 border-[#3b2811]  shadow text-lg ri-arrow-right-wide-fill flex justify-center items-center"></i>
-                     </div>
-                     <!-- progres bar -->
-                     <div class="w-full bg-gray-300 h-1 rounded-full overflow-hidden">
-                        <div class="bg-[#5a3e2b] h-full rounded-full w-[60%]"></div>
-                     </div>
-                  </div>
-               </div>
-               <!-- 2-end -->
-               <div class="swiper-slide bg-white rounded-xl shadow  ">
-                  <!-- img -->
-                  <img src="/images/bg1.jpg" alt="" class="w-full h-48 object-cover object-bottom rounded-lg shadow">
-                  <div class=" flex flex-col items-center  py-3 px-3 mb-1 space-y-2">
-                     <div class="flex items-center justify-center bg-[#9a806c] text-white  w-8 h-8 rounded-full ">
-                        1</div>
-                     <p class="text-center">aqidah</p>
-                     <span class="block text-center text-[#817565]">3 videos</span>
-                  </div>
-                  <p class="text-center py-2 mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                  <div class="flex justify-center mb-3 p-2">
-                     <button class="bg-[#3b2811] text-white rounded-full px-3 py-2 w-full">enroll now</button>
-                  </div>
-                  <hr class="border-1 border-slate-200 mt-2 mb-2">
-                  <div class="px-3 pb-4 mb-4">
-                     <div class="w-full flex justify-between items-center p-3">
-                        <p class="text-[#3b2811]">Lorem ipsum dolor, sit amet consectetur.</p>
-                        <!-- icon -->
-                        <i
-                           class="w-8 h-8 rounded-full bg-transparent text-[#3b2811] border-1 border-[#3b2811]  shadow text-lg ri-arrow-right-wide-fill flex justify-center items-center"></i>
-                     </div>
-                     <!-- progres bar -->
-                     <div class="w-full bg-gray-300 h-1 rounded-full overflow-hidden">
-                        <div class="bg-[#5a3e2b] h-full rounded-full w-[60%]"></div>
-                     </div>
-                  </div>
-               </div>
-               <!-- 3-end -->
-               <div class="swiper-slide bg-white rounded-xl shadow  ">
-                  <!-- img -->
-                  <img src="/images/bg1.jpg" alt="" class="w-full h-48 object-cover object-bottom rounded-lg shadow">
-                  <div class=" flex flex-col items-center  py-3 px-3 mb-1 space-y-2">
-                     <div class="flex items-center justify-center bg-[#9a806c] text-white w-8 h-8 rounded-full ">1</div>
-                     <p class="text-center">aqidah</p>
-                     <span class="block text-center text-[#817565]">3 videos</span>
-                  </div>
-                  <p class="text-center py-2 mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                  <div class="flex justify-center mb-3 p-2">
-                     <button class="bg-[#3b2811] text-white rounded-full px-3 py-2 w-full">enroll now</button>
-                  </div>
-                  <hr class="border-1 border-slate-200 mt-2 mb-2">
-                  <div class="px-3 pb-4 mb-4">
-                     <div class="w-full flex justify-between items-center p-3">
-                        <p class="text-[#3b2811]">Lorem ipsum dolor, sit amet consectetur.</p>
-                        <!-- icon -->
-                        <i
-                           class="w-8 h-8 rounded-full bg-transparent text-[#3b2811] border-1 border-[#3b2811]  shadow text-lg ri-arrow-right-wide-fill flex justify-center items-center"></i>
-                     </div>
-                     <!-- progres bar -->
-                     <div class="w-full bg-gray-300 h-1 rounded-full overflow-hidden">
-                        <div class="bg-[#5a3e2b] h-full rounded-full w-[60%]"></div>
-                     </div>
-                  </div>
-               </div>
-               <!-- 4end -->
-               <div class="swiper-slide bg-white rounded-xl shadow  ">
-                  <!-- img -->
-                  <img src="/images/bg1.jpg" alt="" class="w-full h-48 object-cover object-bottom rounded-lg shadow">
-                  <div class=" flex flex-col items-center  py-3 px-3 mb-1 space-y-2">
-                     <div class="flex items-center justify-center bg-[#9a806c] text-white w-8 h-8 rounded-full ">1</div>
-                     <p class="text-center">aqidah</p>
-                     <span class="block text-center text-[#817565]">3 videos</span>
-                  </div>
-                  <p class="text-center py-2 mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                  <div class="flex justify-center mb-3 p-2">
-                     <button class="bg-[#3b2811] text-white rounded-full px-3 py-2 w-full">enroll now</button>
-                  </div>
-                  <hr class="border-1 border-slate-200 mt-2 mb-2">
-                  <div class="px-3 pb-4 mb-4">
-                     <div class="w-full flex justify-between items-center p-3">
-                        <p class="text-[#3b2811]">Lorem ipsum dolor, sit amet consectetur.</p>
-                        <!-- icon -->
-                        <i
-                           class="w-8 h-8 rounded-full bg-transparent text-[#3b2811] border-1 border-[#3b2811]  shadow text-lg ri-arrow-right-wide-fill flex justify-center items-center"></i>
-                     </div>
-                     <!-- progres bar -->
-                     <div class="w-full bg-gray-300 h-1 rounded-full overflow-hidden">
-                        <div class="bg-[#5a3e2b] h-full rounded-full w-[60%]"></div>
-                     </div>
-                  </div>
-               </div>
-               <!-- 5end -->
-               <div class="swiper-slide bg-white rounded-xl shadow  ">
-                  <!-- img -->
-                  <img src="/images/bg1.jpg" alt="" class="w-full h-48 object-cover object-bottom rounded-lg shadow">
-                  <div class=" flex flex-col items-center  py-3 px-3 mb-1 space-y-2">
-                     <div class="flex items-center justify-center  bg-[#9a806c] text-white w-8 h-8 rounded-full ">1
-                     </div>
-                     <p class="text-center">aqidah</p>
-                     <span class="block text-center text-[#817565]">3 videos</span>
-                  </div>
-                  <p class="text-center py-2 mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                  <div class="flex justify-center mb-3 p-2">
-                     <button class="bg-[#3b2811] text-white rounded-full px-3 py-2 w-full">enroll now</button>
-                  </div>
-                  <hr class="border-1 border-slate-200 mt-2 mb-2">
-                  <div class="px-3 pb-4 mb-4">
-                     <div class="w-full flex justify-between items-center p-3">
-                        <p class="text-[#3b2811]">Lorem ipsum dolor, sit amet consectetur.</p>
-                        <!-- icon -->
-                        <i
-                           class="w-8 h-8 rounded-full bg-transparent text-[#3b2811] border-1 border-[#3b2811]  shadow text-lg ri-arrow-right-wide-fill flex justify-center items-center"></i>
-                     </div>
-                     <!-- progres bar -->
-                     <div class="w-full bg-gray-300 h-1 rounded-full overflow-hidden">
-                        <div class="bg-[#5a3e2b] h-full rounded-full w-[60%]"></div>
-                     </div>
-                  </div>
-               </div>
-               <!-- 6end -->
-
-            </div>
-            <div class="mt-10">
-               <!-- If we need pagination -->
-               <div class="swiper-pagination"></div>
-
-               <!-- If we need navigation buttons -->
-               <div class="swiper-button-prev"></div>
-               <div class="swiper-button-next"></div>
-
-               <!-- If we need scrollbar -->
-               <div class="swiper-scrollbar"></div>
-            </div>
-         </div>
-
-      </div>
-      <!-- viewmore -->
-      <!-- viewmore -->
+  <body>
+    <!-- container -->
+    <div class="flex flex-col lg:flex-row min-h-screen">
+      <!-- overlay mobile -->
       <div
-         class="flex justify-center mx-auto mt-5 w-[120px] bg-[#3b2811] text-white rounded-full shadow text-center p-3">
-         view more
+        class="overlay w-full hidden h-screen bg-black/65 fixed top-0 left-0 z-[1000]"
+      ></div>
+      <!-- overlay end -->
+      <!-- sidebar -->
+      <div
+        class="sidebar lg:w-72 bg-white h-screen flex flex-col fixed top-0 left-0 -translate-x-full transition-transform duration-300 z-[1001] lg:sticky lg:translate-x-0 overflow-y-scroll dark:bg-[#273142]"
+      >
+        <!-- logo -->
+        <div
+          class="z-[999] w-full px-4 py-4 flex items-center justify-between border-b border-b-neutral-200 dark:border-b-[#323d4e]"
+        >
+          <img
+            src="/images/logo.png"
+            alt="logo"
+            class="object-cover block dark:hidden"
+          />
+          <img
+            src="/images/logo-light.png"
+            alt=""
+            class="object-cover hidden dark:block"
+          />
+          <!-- close mobile -->
+          <div
+            class="closeMobile lg:hidden self-start w-8 h-8 flex items-center justify-center rounded-full bg-transparent border border-[#d1d5db]"
+          >
+            <i class="ri-close-line text-neutral-500 text-lg"></i>
+          </div>
+          <!-- close mobile end -->
+        </div>
+
+        <!-- menu sidebar -->
+        <div class="flex flex-col px-3">
+          <!-- dashboar -->
+
+          <div
+            class="dashboardRow flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-3 mt-3 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-home-6-line text-xl"></i>
+              <span class="text-lg font-medium">Dashboard</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- submenu dashboard -->
+          <div
+            class="subMenuDashboard flex flex-col px-4 space-y-1 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">AI</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">CRM</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">eCommerce</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Cryptocurrency</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-green-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Investment</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-purple-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">LMS</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer bg-blue-100 dark:bg-[#4b5563] rounded-lg"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span
+                class="text-md font-medium text-neutral-900 dark:text-[#d1d5db]"
+                >NFT & Gaming</span
+              >
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Medical</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Analytics</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">POS & Inventory</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Finanace & Banking</span>
+            </div>
+          </div>
+
+          <!-- dashboar end -->
+
+          <div
+            class="text-neutral-500 font-semibold px-2 mb-3 mt-3 dark:text-[#9ca3af]"
+          >
+            Application
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 mb-3 dark:text-[#d1d5db]"
+          >
+            <i class="ri-mail-line text-xl"></i>
+            <span class="font-medium">Email</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 mb-3 dark:text-[#d1d5db]"
+          >
+            <i class="ri-chat-voice-fill text-xl"></i>
+            <span class="font-medium">Chat</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 mb-3 dark:text-[#d1d5db]"
+          >
+            <i class="ri-calendar-line text-xl"></i>
+            <span class="font-medium">Calender</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 mb-3 dark:text-[#d1d5db]"
+          >
+            <i class="ri-kanban-view text-xl"></i>
+            <span class="font-medium">Kanban</span>
+          </div>
+
+          <!-- dopdown 1 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-currency-line text-xl"></i>
+              <span class="font-medium">Invoice</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown end -->
+
+          <!-- sub-menu dropdown 1 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">List</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Preview</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Add new</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">edit</span>
+            </div>
+          </div>
+          <!-- sub-menu dropdown 1 end -->
+
+          <!-- dropodown 2 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-robot-2-line text-xl"></i>
+              <span class="font-medium">AI</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropodown 2 end -->
+
+          <!-- sub-menu dropdown 2 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Text Generator</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Code Generator</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Image Generator</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Voice Generator</span>
+            </div>
+
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-green-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Video GeneratorS</span>
+            </div>
+          </div>
+          <!-- sub-menu dropdown 2 end -->
+
+          <!-- dropdown 3 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-btc-line text-xl"></i>
+              <span class="font-medium">Crypto currency</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 3 end -->
+
+          <!-- sub-menu dropdown 3 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Wallet</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Marketplace</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Marketplace Details</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">PortofSolios</span>
+            </div>
+          </div>
+          <!-- sub-menu dropdown 3 -->
+
+          <div
+            class="text-neutral-500 font-semibold px-2 mt-3 mb-2 dark:text-[#9ca3af]"
+          >
+            UI Elements
+          </div>
+
+          <!-- dropdown 4 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-file-list-2-line text-xl"></i>
+              <span class="font-medium">Components</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 4 end -->
+
+          <!-- sub-menu dropdown 4 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Typography</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">colors</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-green-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Button</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-purple-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Dropdown</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Alert</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Card</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Courosel</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-green-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Avatars</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Progress bar</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Tab & Accordion</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Pagination</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Badges</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-purple-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Tool & Popover</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-teal-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Videos</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-purple-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Star Ratings</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-purple-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Tags</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">List</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Calender</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-orange-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Radio</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-pink-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Switch</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Upload</span>
+            </div>
+          </div>
+          <!-- sub-menu dropdown 4 end -->
+
+          <!-- dropdown 5 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-file-3-fill text-xl"></i>
+              <span class="font-medium">Form</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 5 end -->
+
+          <!-- submenu dropdown-5 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Input Forms</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Input Layout</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-green-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Form Validation</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Form Wizard</span>
+            </div>
+          </div>
+          <!-- submenu dropdown-5 -->
+
+          <!-- dropdown 6 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-archive-drawer-line text-xl"></i>
+              <span class="font-medium">Tables</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 6 end -->
+
+          <!-- submenu dropdown-6  -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Basic Table</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Data Table</span>
+            </div>
+          </div>
+          <!-- submenu dropdown-6 end -->
+
+          <!-- dropdown 7 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-pie-chart-2-line text-xl"></i>
+              <span class="font-medium">Chart</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 7 -->
+
+          <!--submenu dropdown-7 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Line Chart</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Column Chart</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-green-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Pie Chart</span>
+            </div>
+          </div>
+          <!--submenu dropdown-7 -->
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 mb-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-dashboard-line text-xl"></i>
+            <span class="font-medium">Widgets</span>
+          </div>
+
+          <!-- dropdown 8 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-group-3-line text-xl"></i>
+              <span class="font-medium">Users</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 8 end -->
+
+          <!--submenu dropdown-8 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Users List</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Users Grid</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-green-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Add User</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-700 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">View Profile</span>
+            </div>
+          </div>
+          <!--submenu dropdown-8 end -->
+
+          <!-- dropdown 9 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-user-settings-line text-xl"></i>
+              <span class="font-medium">Role & Access</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 9 -->
+
+          <!-- submenu 9 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Role & Access</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Assign Role</span>
+            </div>
+          </div>
+          <!-- submenu 9 end-->
+
+          <div
+            class="text-neutral-500 font-semibold px-2 mt-3 mb-2 dark:text-[#9ca3af]"
+          >
+            Applications
+          </div>
+
+          <!-- dropdown 10 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-shield-line text-xl"></i>
+              <span class="font-medium">Authentication</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 10 end -->
+
+          <!-- sub menu 10 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Sign In</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Sign up</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Forgot Password</span>
+            </div>
+          </div>
+          <!-- sub menu 10 -->
+
+          <!-- dropdown 11 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-image-2-line text-xl"></i>
+              <span class="font-medium">Gallery</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 11 -->
+
+          <!-- submenu dropdown 11 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Gallery Grid</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">allery Grid Desc</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Gallery Grid</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Gallery Hover Effect</span>
+            </div>
+          </div>
+          <!-- submenu dropdown 11 -->
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-money-dollar-box-line text-xl"></i>
+            <span class="font-medium">Pricing</span>
+          </div>
+
+          <!-- dropdown 12 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-blogger-line text-xl"></i>
+              <span class="font-medium">Blog</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 12 end -->
+
+          <!-- submenu 12 -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Blog</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Blog details</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Add Blog</span>
+            </div>
+          </div>
+          <!-- submenu 12 end -->
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-question-line text-xl"></i>
+            <span class="font-medium">Testimonials</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-question-line text-xl"></i>
+            <span class="font-medium">FAQ</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-emotion-normal-line text-xl"></i>
+            <span class="font-medium">404</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-error-warning-line text-xl"></i>
+            <span class="font-medium">Terms & SConditions</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-rocket-line text-xl"></i>
+            <span class="font-medium">Coming Soon</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-folder-lock-line text-xl"></i>
+            <span class="font-medium">Access Denied</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-hammer-line text-xl"></i>
+            <span class="font-medium">Maintenance</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 text-neutral-600 hover:text-blue-500 cursor-pointer px-4 py-1 dark:text-[#d1d5db]"
+          >
+            <i class="ri-checkbox-multiple-blank-line text-xl"></i>
+            <span class="font-medium">Blank Space</span>
+          </div>
+          <!-- dropdown 13 -->
+          <div
+            class="dropdownBtn flex items-center justify-between hover:text-blue-500 w-full px-4 py-2 text-neutral-600 cursor-pointer mb-1 dark:text-[#d1d5db]"
+          >
+            <div class="flex gap-2 items-center">
+              <i class="ri-settings-2-line text-xl"></i>
+              <span class="font-medium">Setting</span>
+            </div>
+            <i
+              class="ri-arrow-right-s-line text-xl transition-transform duration-300"
+            ></i>
+          </div>
+          <!-- dropdown 13 end -->
+
+          <!-- submenu dropdown -->
+          <div
+            class="DropdownMenu flex flex-col px-4 mb-2 overflow-hidden max-h-0 transition-all duration-300 text-neutral-600 bg-white dark:bg-[#273142] dark:text-[#d1d5db]"
+          >
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Company</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-yellow-500 text-xs"
+              ></i>
+              <span class="text-md font-medium">Notification</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i
+                class="ri-checkbox-blank-circle-fill text-blue-700 text-xs"
+              ></i>
+              <span class="text-md font-medium">Notification Alert</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Theme</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Currencies</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Langguages</span>
+            </div>
+            <div
+              class="flex items-center px-6 py-2 gap-3 hover:text-blue-500 cursor-pointer"
+            >
+              <i class="ri-checkbox-blank-circle-fill text-red-500 text-xs"></i>
+              <span class="text-md font-medium">Payment Gateway</span>
+            </div>
+          </div>
+          <!-- submenu dropdown -->
+        </div>
       </div>
-   </div>
-   <!-- roadmap-end -->
+      <!-- sidebar-end -->
 
-   <!-- infograpichs -->
-   <div class="bg-[#885d29a2] py-20">
-      <div class="max-w-7xl mx-auto px-3">
-         <div class="mb-5 ">
-            <h1 class="text-center font-bold text-3xl text-white uppercase">infographic</h1>
-         </div>
-         <!-- swiper card -->
-         <div class="swiper mySwiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper ">
-               <!-- Slides -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3 pb-2">
-                        <p class="bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <!-- <div class="bg-white rounded-full shadow w-20 absolute top-4 left-2">
-                        <i class="ri-star-line">premium</i>
-                     </div> -->
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
+      <!-- main -->
+
+      <div
+        class="main flex-1 bg-[#f5f6fa] flex flex-col border-l border-l-neutral-300 dark:bg-[#1b2431] dark:border-l-[#323d4e]"
+      >
+        <!-- header -->
+        <div
+          class="header navbar bg-white sticky top-0 w-full p-4 z-[999] dark:bg-[#273142]"
+        >
+          <div class="flex items-center justify-between">
+            <!-- hamburger menu + serachbar -->
+            <div class="flex items-center gap-4">
+              <!-- hamburger menu mobile -->
+              <div class="mobileHamburger text-2xl lg:hidden dark:text-white">
+                <i class="ri-menu-line"></i>
+              </div>
+              <!-- desktop btn hamburger menu -->
+              <div
+                class="DesktopHamburger hidden text-2xl lg:block dark:text-white"
+              >
+                <i class="ri-menu-line"></i>
+              </div>
+              <!-- search bar -->
+              <div class="hidden lg:flex lg:items-center gap-4 relative">
+                <input
+                  type="search"
+                  name="search"
+                  id="search"
+                  placeholder="Search"
+                  class="border border-neutral-300 bg-neutral-50 rounded-lg px-10 py-2 w-96 text-neutral-900 flex items-center gap-4 shadow dark:bg-[#1b2431] dark:border dark:border-[#5f666f] dark:text-white"
+                />
+                <!-- icon search -->
+                <div
+                  class="absolute top-[50%] translate-y-[-50%] text-xl px-4 text-neutral-900 dark:text-white"
+                >
+                  <i class="ri-search-line"></i>
+                </div>
+              </div>
+            </div>
+            <!-- darkmode toggle+changelang+message+notif+user -->
+            <div class="flex items-center gap-4">
+              <!-- dark toggle -->
+              <div
+                id="darkModeToggle"
+                class="w-9 h-9 rounded-full bg-neutral-200 text-xl flex items-center justify-center cursor-pointer dark:bg-[#323d4e]"
+              >
+                <i class="ri-sun-line text-neutral-900 dark:text-white"></i>
+              </div>
+              <!-- change lang -->
+              <div
+                class="changeLangBtn hidden w-9 h-9 rounded-full bg-neutral-200 text-xl lg:flex lg:items-center lg:justify-center cursor-pointer relative dark:bg-[#323d4e]"
+              >
+                <img src="/public/images/us flg.png" alt="" />
+                <!-- menu -->
+                <div
+                  class="changeLangMenu hidden absolute top-full right-0 bg-white rounded-lg w-78 mt-3 p-4 shadow-xs space-y-4 text-neutral-600 font-medium dark:bg-[#273142]"
+                >
+                  <div
+                    class="bg-sky-100 flex items-center px-4 py-2 rounded-lg text-neutral-800 dark:bg-[#e4f1ff0f]"
+                  >
+                    <h4 class="text-lg font-semibold dark:text-white">
+                      chose your langguage
+                    </h4>
                   </div>
-                  <!--  -->
-               </div>
-               <!-- slide-1-end -->
-               <!-- slide-2 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3 pb-2">
-                        <p class="bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <!-- <div class="bg-white rounded-full shadow w-20 absolute top-4 left-2">
-                        <i class="ri-star-line">premium</i>
-                     </div> -->
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
+                  <!-- form lang check -->
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="english"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag1.png"
+                          alt=""
+                          class="object-cover rounded-full w-full group-hover:text-blue-500"
+                        />
+                        <span
+                          class="text-neutral-800 dark:text-white group-hover:text-blue-500 font-medium text-md"
+                          >English</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
                   </div>
-                  <!--  -->
-               </div>
-               <!-- 3 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3 pb-2">
-                        <p class="bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <!-- <div class="bg-white rounded-full shadow w-20 absolute top-4 left-2">
-                        <i class="ri-star-line">premium</i>
-                     </div> -->
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
+
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="japan"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag2.png"
+                          alt=""
+                          class="object-cover rounded-full w-full group-hover:text-blue-500"
+                        />
+                        <span
+                          class="dark:text-white text-neutral-800 group-hover:text-blue-500 font-medium text-md"
+                          >Japan</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
                   </div>
-                  <!--  -->
-               </div>
-               <!-- 4 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3 pb-2">
-                        <p class="bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <!-- <div class="bg-white rounded-full shadow w-20 absolute top-4 left-2">
-                        <i class="ri-star-line">premium</i>
-                     </div> -->
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
+
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="France"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag3.png"
+                          alt=""
+                          class="object-cover rounded-full w-full group-hover:text-blue-500"
+                        />
+                        <span
+                          class="text-neutral-800 dark:text-white group-hover:text-blue-500 font-medium text-md"
+                          >France</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
                   </div>
-                  <!--  -->
-               </div>
-               <!-- 5 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3 pb-2">
-                        <p class="bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <!-- <div class="bg-white rounded-full shadow w-20 absolute top-4 left-2">
-                        <i class="ri-star-line">premium</i>
-                     </div> -->
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
+
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="Germany"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag4.png"
+                          alt=""
+                          class="object-cover rounded-full w-full group-hover:text-blue-500"
+                        />
+                        <span
+                          class="text-neutral-800 dark:text-white group-hover:text-blue-500 font-medium text-md"
+                          >Germany</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
                   </div>
-                  <!--  -->
-               </div>
-               <!-- 6 -->
-               <div class="swiper-slide bg-white rounded-xl shadow">
-                  <!-- img -->
-                  <div class="relative">
-                     <img src="/images/bg1.jpg" alt="gambar-1"
-                        class="object-cover object-bottom w-full h-48 rounded shadow">
-                     <div class="pt-5 px-3 space-y-3 pb-2">
-                        <p class="bg-[#f4e6db] flex items-center w-24  px-3 rounded-lg">4 courses</p>
-                        <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h3>
-                     </div>
-                     <!-- icon -->
-                     <!-- <div class="bg-white rounded-full shadow w-20 absolute top-4 left-2">
-                        <i class="ri-star-line">premium</i>
-                     </div> -->
-                     <!-- icon -->
-                     <div
-                        class="absolute top-4 right-2 bg-white rounded-full shadow w-8 h-8 flex justify-center items-center ">
-                        <i class="ri-heart-line"></i>
-                     </div>
+
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="South korea"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag5.png"
+                          alt=""
+                          class="group-hover:text-blue-500"
+                        />
+                        <span
+                          class="text-neutral-800 dark:text-white group-hover:text-blue-500 font-medium text-md"
+                          >South korea</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
                   </div>
-                  <!--  -->
-               </div>
-               <!-- 6-end -->
+
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="Bangladesh"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag6.png"
+                          alt=""
+                          class="group-hover:text-blue-500"
+                        />
+                        <span
+                          class="text-neutral-800 dark:text-white group-hover:text-blue-500 font-medium text-md"
+                          >Bangladesh</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="India"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag7.png"
+                          alt=""
+                          class="group-hover:text-blue-500"
+                        />
+                        <span
+                          class="text-neutral-800 dark:text-white group-hover:text-blue-500 font-medium text-md"
+                          >India</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="Canada"
+                      class="flex items-center gap-3 cursor-pointer"
+                    >
+                      <div class="group flex items-center gap-3">
+                        <img
+                          src="/public/images/flag8.png"
+                          alt=""
+                          class="group-hover:text-blue-500"
+                        />
+                        <span
+                          class="text-neutral-800 dark:text-white group-hover:text-blue-500 font-medium text-md"
+                          >Canada</span
+                        >
+                      </div>
+                    </label>
+                    <input
+                      type="radio"
+                      name="lang"
+                      id="lang"
+                      class="cursor-pointer"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- email -->
+              <div
+                class="emailBtn w-9 h-9 rounded-full bg-neutral-200 text-xl flex items-center justify-center cursor-pointer relative dark:bg-[#323d4e]"
+              >
+                <i class="ri-mail-line text-[#111827] dark:text-white"></i>
+                <!-- menu email -->
+                <div
+                  class="emailMenu hidden bg-white rounded-lg shadow absolute top-full right-0 w-78 p-4 mt-4 dark:bg-[#273142]"
+                >
+                  <!-- mesage -->
+                  <div
+                    class="flex items-center justify-between bg-sky-100 rounded-lg w-full font-semibold px-4 py-2 mb-4 dark:bg-[#e4f1ff0f]"
+                  >
+                    <h6 class="text-lg text-[#111827] dark:text-white">
+                      Message
+                    </h6>
+                    <span
+                      class="w-10 h-10 flex items-center justify-center bg-white text-sky-600 rounded-full dark:bg-[#273142]"
+                      >05</span
+                    >
+                  </div>
+                  <!-- message end -->
+                  <!--wraper -->
+                  <div class="flex flex-col gap-1 w-full">
+                    <!-- profile -->
+                    <div class="flex items-center justify-between py-2 px-2">
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <img src="/public/images/profile-3.png" alt="" />
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Kathryn Murphy
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            hi! there i'...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="flex flex-col gap-1">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          12:30 PM
+                        </h6>
+                        <span
+                          class="text-xs w-5 h-5 rounded-full flex items-center justify-center text-white bg-yellow-500 self-end dark:text-[#273142]"
+                          >8</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between py-2 px-2">
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <img src="/public/images/profile-4.png" alt="" />
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Kathryn Murphy
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            hi! there i'...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="flex flex-col gap-1">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          12:30 PM
+                        </h6>
+                        <span
+                          class="text-xs w-5 h-5 rounded-full flex items-center justify-center text-white bg-yellow-500 self-end dark:text-[#273142]"
+                          >8</span
+                        >
+                      </div>
+                    </div>
+
+                    <div
+                      class="flex items-center justify-between bg-neutral-200 dark:bg-[#1b2431] w-full py-2 px-2"
+                    >
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <img src="/public/images/profile-5.png" alt="" />
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Kathryn Murphy
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            hi! there i'...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="flex flex-col gap-1">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          12:30 PM
+                        </h6>
+                        <span
+                          class="text-xs w-5 h-5 rounded-full flex items-center justify-center text-white bg-neutral-400 self-end dark:bg-[#6b7280] dark:text-[#273142]"
+                          >0</span
+                        >
+                      </div>
+                    </div>
+
+                    <div
+                      class="flex items-center justify-between bg-neutral-200 dark:bg-[#1b2431] w-full py-2 px-2"
+                    >
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <img src="/public/images/profile-5.png" alt="" />
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Kathryn Murphy
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            hi! there i'...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="flex flex-col gap-1">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          12:30 PM
+                        </h6>
+                        <span
+                          class="text-xs w-5 h-5 rounded-full flex items-center justify-center text-white bg-neutral-400 self-end dark:bg-[#6b7280] dark:text-[#273142]"
+                          >0</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between py-2 px-2">
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <img src="/public/images/profile-7.png" alt="" />
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Kathryn Murphy
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            hi! there i'...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="flex flex-col gap-1">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          12:30 PM
+                        </h6>
+                        <span
+                          class="text-xs w-5 h-5 rounded-full flex items-center justify-center text-white bg-yellow-500 self-end dark:text-[#273142]"
+                          >8</span
+                        >
+                      </div>
+                    </div>
+                    <!-- profile end -->
+                    <div
+                      class="w-full flex items-center justify-center mt-1 text-sky-600 text-base font-semibold"
+                    >
+                      See All Message
+                    </div>
+                  </div>
+                  <!-- wraper -->
+                </div>
+                <!-- menu email end -->
+              </div>
+              <!-- email-end -->
+
+              <!-- notif -->
+              <div
+                class="notifBtn w-9 h-9 rounded-full bg-neutral-200 text-xl flex items-center justify-center cursor-pointer relative dark:bg-[#323d4e]"
+              >
+                <i class="ri-notification-4-line dark:text-white"></i>
+                <!-- menu -->
+                <div
+                  class="notifMenu hidden bg-white rounded-lg shadow absolute top-full right-0 w-80 p-4 mt-4 dark:bg-[#273142]"
+                >
+                  <!-- mesage -->
+                  <div
+                    class="flex items-center justify-between bg-sky-100 rounded-lg w-full font-semibold px-4 py-2 mb-4 dark:bg-[#e4f1ff0f]"
+                  >
+                    <h6 class="text-lg text-neutral-900 dark:text-white">
+                      Notification
+                    </h6>
+                    <span
+                      class="w-10 h-10 flex items-center justify-center bg-white text-sky-600 rounded-full dark:bg-[#273142]"
+                      >05</span
+                    >
+                  </div>
+                  <!-- message end -->
+                  <!--wraper -->
+                  <div class="flex flex-col gap-2 w-full">
+                    <!-- profile -->
+                    <div class="flex items-center justify-between py-2 px-2">
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="w-10 h-10 flex items-center justify-center bg-green-300/50 rounded-full dark:bg-[#d1e7dd]"
+                        >
+                          <i
+                            class="ri-verified-badge-line text-green-700 dark:text-[#45b369]"
+                          ></i>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Congratulations
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            Your profile has been...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="self-start">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          23 Min ago
+                        </h6>
+                      </div>
+                    </div>
+
+                    <div
+                      class="flex items-center justify-between py-2 px-2 bg-neutral-200 dark:bg-[#1b2431]"
+                    >
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <img
+                          src="/public/images/notif profile.png"
+                          alt="profile"
+                        />
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Kathe Richard
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            you can switch...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="self-start">
+                        <h6
+                          class="text-sm flex text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          23 Min ago
+                        </h6>
+                      </div>
+                    </div>
+
+                    <div
+                      class="flex items-center justify-between w-full py-2 px-2"
+                    >
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-300 dark:bg-[#cff4fc]"
+                        >
+                          <span
+                            class="text-base font-semibold text-sky-800 dark:text-[#144bd6]"
+                            >AM</span
+                          >
+                        </div>
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Arlenna MC
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            Invite you to prototy...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="self-start">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          23 Min ago
+                        </h6>
+                      </div>
+                    </div>
+
+                    <div
+                      class="flex items-center justify-between bg-neutral-200 w-full py-2 px-2 dark:bg-[#1b2431]"
+                    >
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <img src="/public/images/notif profile-2.png" alt="" />
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Ronald Murphy
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            Invite you to prototy...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="self-start">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          23 Min ago
+                        </h6>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between py-2 px-2">
+                      <!-- img+text -->
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="w-10 h-10 flex items-center justify-center bg-blue-300 rounded-full text-blue-700 dark:bg-[#cff4fc] dark:text-[#144bd6]"
+                        >
+                          DR
+                        </div>
+                        <div class="flex flex-col gap-1">
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Darlane Robert
+                          </h6>
+                          <p class="text-sm text-slate-600 dark:text-[#d1d5db]">
+                            Invite you to prototy...
+                          </p>
+                        </div>
+                      </div>
+                      <!-- img+text end -->
+                      <div class="self-start">
+                        <h6
+                          class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >
+                          23 Min ago
+                        </h6>
+                      </div>
+                    </div>
+                    <!-- profile end -->
+                    <div
+                      class="w-full flex items-center justify-center mt-1 text-sky-600 text-base font-semibold"
+                    >
+                      See All Notification
+                    </div>
+                  </div>
+                  <!-- wraper -->
+                </div>
+                <!-- menu end-->
+              </div>
+
+              <!-- user -->
+              <div
+                class="userBtn w-9 h-9 rounded-full bg-neutral-200 text-xl flex items-center justify-center cursor-pointer relative"
+              >
+                <img src="/images/user.png" alt="" />
+                <!-- menu -->
+                <div
+                  class="userMenu hidden bg-white rounded-lg shadow absolute top-full right-0 w-80 p-4 mt-4 dark:bg-[#273142]"
+                >
+                  <!-- notif mesage -->
+                  <div
+                    class="flex items-center justify-between bg-sky-100 rounded-lg w-full font-semibold px-4 py-2 mb-6 dark:bg-[#e4f1ff0f]"
+                  >
+                    <div class="flex flex-col gap-1">
+                      <h6 class="text-lg text-neutral-900 dark:text-white">
+                        Abdul Islam
+                      </h6>
+                      <span class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >Admin</span
+                      >
+                    </div>
+                    <!-- close user btn -->
+                    <div
+                      class="text-xl text-neutral-600 dark:text-[#212529] hover:text-red-500 transition-all duration-300"
+                    >
+                      <i class="ri-close-large-line"></i>
+                    </div>
+                  </div>
+                  <!-- message end -->
+                  <!--wraper -->
+                  <div class="flex flex-col gap-4 w-full">
+                    <div class="space-y-4">
+                      <!-- profile -->
+                      <div
+                        class="flex items-center gap-3 font-medium text-black/70 hover:text-blue-500 transition-all duration-300 dark:text-white"
+                      >
+                        <i class="ri-user-line text-xl"></i>
+                        <p class="text-xl">My Profile</p>
+                      </div>
+
+                      <div
+                        class="flex items-center gap-3 font-medium text-black/70 hover:text-blue-500 transition-all duration-300 dark:text-white"
+                      >
+                        <i class="ri-mail-send-line text-xl"></i>
+                        <p class="text-xl">Inbox</p>
+                      </div>
+
+                      <div
+                        class="flex items-center gap-3 font-medium text-black/70 hover:text-blue-500 transition-all duration-300 dark:text-white"
+                      >
+                        <i class="ri-settings-2-line text-xl"></i>
+                        <p class="text-xl">Settings</p>
+                      </div>
+
+                      <div
+                        class="flex items-center gap-3 font-medium text-black/70 hover:text-orange-500 transition-all duration-300 dark:text-white"
+                      >
+                        <i class="ri-shut-down-line text-xl"></i>
+                        <p class="text-xl">Log Out</p>
+                      </div>
+                    </div>
+                    <!-- profile end -->
+                  </div>
+                  <!-- wraper end -->
+                </div>
+                <!-- menu end -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- header-end -->
+
+        <!-- dashbor main -->
+        <div class="p-4 lg:flex lg:items-center lg:justify-between mb-2">
+          <h1 class="font-semibold text-neutral-900 text-xl dark:text-white">
+            Dashboard
+          </h1>
+          <div class="flex items-center gap-2">
+            <div
+              class="flex items-center gap-1 hover:text-blue-500 cursor-pointer font-medium text-neutral-600 dark:text-[#d1d5db]"
+            >
+              <i class="ri-home-line"></i>
+              <h4>Dashboard</h4>
             </div>
 
-            <!-- If we need pagination -->
-            <div class="mt-10 text-black">
-               <div class="swiper-pagination mt-5"></div>
-
-               <!-- If we need navigation buttons -->
-               <div class="swiper-button-prev"></div>
-               <div class="swiper-button-next"></div>
-
-               <!-- If we need scrollbar -->
-               <div class="swiper-scrollbar"></div>
+            <div class="font-medium text-neutral-600 dark:text-[#d1d5db]">
+              -
             </div>
-         </div>
+
+            <div
+              class="flex items-center gap-1 font-medium text-neutral-600 dark:text-[#d1d5db]"
+            >
+              <h4>NFT & Gaming</h4>
+            </div>
+          </div>
+        </div>
+        <!-- dashboar main end -->
+        <!-- wrapper -->
+        <div class="flex flex-col lg:flex-row gap-6 px-6">
+          <!-- left -->
+          <div class="flex-1">
+            <!-- nft banner -->
+            <div class="relative overflow-hidden rounded-2xl mb-6">
+              <!-- gradient bg -->
+              <img
+                src="/images/nft-gradient-bg.png"
+                alt="nft-gradient-bg"
+                class="absolute top-0 left-0 object-cover z-1 rounded-2xl overflow-hidden w-full min-h-full"
+              />
+              <!-- konten cat img + text -->
+              <div
+                class="flex flex-col p-4 gap-5 relative z-10 lg:flex-row lg:items-center lg:px-10 lg:py-6 lg:gap-7"
+              >
+                <img
+                  src="/images/cat nft.png"
+                  alt=""
+                  class="rounded-xl object-contain px-4 w-full max-w-xl mx-auto lg:max-w-sm"
+                />
+                <div class="lg:flex-1">
+                  <h1
+                    class="text-2xl font-semibold lg:text-4xl lg:font-bold text-white mb-4"
+                  >
+                    Discover The Largest NFTs Marketplace
+                  </h1>
+                  <p class="text-base text-white mb-6">
+                    The largest NFT (Non-Fungible Token) marketplace is OpenSea.
+                    Established in 2017, OpenSea has grown to become the leading
+                    platform for buying, selling, and trading digital assets,
+                  </p>
+                  <div class="flex flex-col lg:flex-row lg:items-center gap-4">
+                    <div
+                      class="self-start rounded-full px-8 text-base py-3 bg-transparent text-white border border-white font-medium hover:text-neutral-900 hover:bg-white transition-all duration-300 cursor-pointer"
+                    >
+                      Explore
+                    </div>
+                    <div
+                      class="self-start whitespace-nowrap rounded-full px-8 text-base py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 transition-all duration-300 cursor-pointer"
+                    >
+                      Create now
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  nft banner end -->
+            <!-- trending bids -->
+            <div class="mb-4">
+              <h6
+                class="text-xl font-semibold text-neutral-900 mb-4 dark:text-white"
+              >
+                Trending Bids
+              </h6>
+              <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                <!-- card -->
+                <div
+                  class="bg-linear-to-r from-sky-200/50 to-sky-50/50 rounded-lg p-6 shadow flex flex-col lg:flex-row lg:items-center gap-4 dark:from-[#e6ebff26] dark:to-[#ffffff1a]"
+                >
+                  <div
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500"
+                  >
+                    <i class="ri-team-fill text-white text-xl"></i>
+                  </div>
+                  <div class="flex flex-col">
+                    <h6
+                      class="text-neutral-900 dark:text-white font-semibold text-2xl"
+                    >
+                      24,000
+                    </h6>
+                    <span
+                      class="text-neutral-600 dark:text-[#d1d5db] text-base font-medium"
+                      >Artworks</span
+                    >
+                    <div class="flex items-center gap-2 mt-2">
+                      <span
+                        class="flex items-center gap-1 bg-green-500/20 text-green-600 px-1 py-1 text-sm"
+                      >
+                        +168.001%
+                        <i class="ri-arrow-up-line"></i>
+                      </span>
+                      <span class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >this week</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="bg-linear-to-r from-red-200/50 to-red-50/50 rounded-lg p-6 shadow flex flex-col lg:flex-row lg:items-center gap-4 dark:from-[#e6ebff26] dark:to-[#ffffff1a]"
+                >
+                  <div
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500"
+                  >
+                    <i class="ri-team-fill text-white text-xl"></i>
+                  </div>
+                  <div class="flex flex-col">
+                    <h6
+                      class="text-neutral-900 dark:text-white font-semibold text-2xl"
+                    >
+                      82,000
+                    </h6>
+                    <span
+                      class="text-neutral-600 dark:text-[#d1d5db] text-base font-medium"
+                      >Auction</span
+                    >
+                    <div class="flex items-center gap-2 mt-2">
+                      <span
+                        class="flex items-center gap-1 bg-red-500/20 text-red-600 px-1 py-1 text-sm"
+                      >
+                        +168.001%
+                        <i class="ri-arrow-down-line"></i>
+                      </span>
+                      <span class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >this week</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="bg-linear-to-r from-fuchsia-200/50 to-fuchsia-50/50 rounded-lg p-6 shadow flex flex-col lg:flex-row lg:items-center gap-4 dark:from-[#e6ebff26] dark:to-[#ffffff1a]"
+                >
+                  <div
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500"
+                  >
+                    <i class="ri-team-fill text-white text-xl"></i>
+                  </div>
+                  <div class="flex flex-col">
+                    <h6
+                      class="text-neutral-900 font-semibold text-2xl dark:text-white"
+                    >
+                      800
+                    </h6>
+                    <span
+                      class="text-neutral-600 dark:text-[#d1d5db] text-base font-medium"
+                      >Creators</span
+                    >
+                    <div class="flex items-center gap-2 mt-2">
+                      <span
+                        class="flex items-center gap-1 bg-green-500/20 text-green-600 px-1 py-1 text-sm"
+                      >
+                        +168.001%
+                        <i class="ri-arrow-up-line"></i>
+                      </span>
+                      <span class="text-sm text-neutral-600 dark:text-[#d1d5db]"
+                        >this week</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- card end-->
+            </div>
+            <!-- trending bids end -->
+
+            <!-- trending nfts -->
+            <div class="my-6">
+              <div
+                class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between mb-4"
+              >
+                <h6
+                  class="text-neutral-900 font-semibold dark:text-white text-xl"
+                >
+                  Trending NFTs
+                </h6>
+                <div class="flex flex-wrap lg:flex-row items-center gap-4">
+                  <div
+                    class="flex items-center rounded-full bg-sky-600 text-white px-6 py-2 cursor-pointer font-medium"
+                  >
+                    All
+                  </div>
+                  <div
+                    class="dark:text-white dark:bg-transparent dark:shadow-[#d1d5db33] flex items-center rounded-full font-medium bg-white text-neutral-600 hover:text-blue-600 px-6 py-2 cursor-pointer shadow shadow-neutral-300"
+                  >
+                    Art
+                  </div>
+
+                  <div
+                    class="dark:text-white dark:bg-transparent dark:shadow-[#d1d5db33] flex items-center rounded-full font-medium bg-white text-neutral-600 hover:text-blue-600 px-6 py-2 cursor-pointer shadow shadow-neutral-300"
+                  >
+                    Music
+                  </div>
+
+                  <div
+                    class="dark:text-white dark:bg-transparent dark:shadow-[#d1d5db33] flex items-center rounded-full font-medium bg-white text-neutral-600 hover:text-blue-600 px-6 py-2 cursor-pointer shadow shadow-neutral-300"
+                  >
+                    Utility
+                  </div>
+
+                  <div
+                    class="dark:text-white dark:bg-transparent dark:shadow-[#d1d5db33] flex items-center rounded-full font-medium bg-white text-neutral-600 hover:text-blue-600 px-6 py-2 cursor-pointer shadow shadow-neutral-300"
+                  >
+                    Fashion
+                  </div>
+                </div>
+              </div>
+              <!-- card trending nfts -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                <!-- card-1 -->
+                <div
+                  class="bg-white overflow-hidden rounded-lg dark:bg-[#273142]"
+                >
+                  <!-- img -->
+                  <img
+                    src="/images/trending nft1 .png"
+                    alt=""
+                    class="w-full object-cover mb-2"
+                  />
+                  <!-- content-card -->
+                  <div class="flex flex-col px-3 space-y-2">
+                    <h6
+                      class="text-base font-bold text-neutral-900 dark:text-white"
+                    >
+                      Fantastic Alien
+                    </h6>
+                    <div class="flex items-center gap-2 mb-2">
+                      <img
+                        src="/public/images/nft-user-img1.png"
+                        alt="nft-user-img1"
+                        class="object-cover"
+                      />
+                      <span
+                        class="text-sm font-medium text-neutral-600 dark:text-[#d1d5db]"
+                        >Watson Kristin</span
+                      >
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                      <span
+                        class="text-sm dark:text-[#d1d5db] font-medium text-neutral-600"
+                        >price:<span
+                          class="text-sm dark:text-white font-semibold text-neutral-900"
+                          >1.44 ETH</span
+                        >
+                      </span>
+                      <span class="text-sm font-semibold text-blue-500"
+                        >$4,224.96</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-4 mb-4">
+                      <div
+                        class="px-6 py-2 rounded-full text-neutral-500 border border-neutral-500 cursor-pointer font-medium hover:bg-neutral-500 hover:text-white hover:shadow transition-all duration-300 dark:text-[#d1d5db] dark:hover:bg-slate-400"
+                      >
+                        History
+                      </div>
+                      <div
+                        class="whitespace-nowrap px-4 py-2 rounded-full hover:shadow text-white border border-blue-500 bg-blue-500 cursor-pointer hover:bg-blue-600 transition-all duration-300"
+                      >
+                        Buy Now
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card 2 -->
+                <div
+                  class="bg-white overflow-hidden rounded-lg dark:bg-[#273142]"
+                >
+                  <!-- img -->
+                  <img
+                    src="/images/trending nft2.png"
+                    alt=""
+                    class="w-full object-cover mb-2"
+                  />
+                  <!-- content-card -->
+                  <div class="flex flex-col px-3 space-y-2">
+                    <h6
+                      class="text-base font-bold text-neutral-900 dark:text-white"
+                    >
+                      Fantastic Alien
+                    </h6>
+                    <div class="flex items-center gap-2 mb-2">
+                      <img
+                        src="/public/images/nft-user-img2.png"
+                        alt="nft-user-img1"
+                        class="object-cover"
+                      />
+                      <span
+                        class="text-sm font-medium dark:text-[#d1d5db] text-neutral-600"
+                        >Watson Kristin</span
+                      >
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                      <span
+                        class="text-sm font-medium dark:text-[#d1d5db] text-neutral-600"
+                        >price:<span
+                          class="text-sm font-semibold dark:text-white text-neutral-900"
+                          >1.44 ETH</span
+                        >
+                      </span>
+                      <span class="text-sm font-semibold text-blue-500"
+                        >$4,224.96</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-5 mb-4">
+                      <div
+                        class="px-6 py-2 rounded-full text-neutral-500 border border-neutral-500 cursor-pointer font-medium hover:bg-neutral-500 hover:text-white hover:shadow transition-all duration-300 dark:text-[#d1d5db] dark:hover:bg-slate-400"
+                      >
+                        History
+                      </div>
+                      <div
+                        class="whitespace-nowrap px-4 py-2 rounded-full hover:shadow text-white border border-blue-500 bg-blue-500 cursor-pointer hover:bg-blue-600 transition-all duration-300"
+                      >
+                        Buy Now
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card-3 -->
+                <div
+                  class="bg-white overflow-hidden rounded-lg dark:bg-[#273142]"
+                >
+                  <!-- img -->
+                  <img
+                    src="/images/trending nft3.png"
+                    alt=""
+                    class="object-cover mb-2 w-full"
+                  />
+                  <!-- content-card -->
+                  <div class="flex flex-col px-3 space-y-2">
+                    <h6
+                      class="text-base font-bold text-neutral-900 dark:text-white"
+                    >
+                      Fantastic Alien
+                    </h6>
+                    <div class="flex items-center gap-2 mb-2">
+                      <img
+                        src="/images/nft-user-img3.png"
+                        alt="nft-user-img1"
+                        class="object-cover"
+                      />
+                      <span
+                        class="text-sm font-medium dark:text-[#d1d5db] text-neutral-600"
+                        >Watson Kristin</span
+                      >
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                      <span
+                        class="text-sm font-medium text-neutral-600 dark:text-[#d1d5db]"
+                        >price:<span
+                          class="text-sm font-semibold dark:text-white text-neutral-900"
+                          >1.44 ETH</span
+                        >
+                      </span>
+                      <span class="text-sm font-semibold text-blue-500"
+                        >$4,224.96</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-5 mb-4">
+                      <div
+                        class="px-6 py-2 rounded-full text-neutral-500 border border-neutral-500 cursor-pointer font-medium hover:bg-neutral-500 hover:text-white hover:shadow transition-all duration-300 dark:text-[#d1d5db] dark:hover:bg-slate-400"
+                      >
+                        History
+                      </div>
+                      <div
+                        class="whitespace-nowrap px-4 py-2 rounded-full hover:shadow text-white border border-blue-500 bg-blue-500 cursor-pointer hover:bg-blue-600 transition-all duration-300"
+                      >
+                        Buy Now
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card-4 -->
+                <div
+                  class="bg-white overflow-hidden rounded-lg dark:bg-[#273142]"
+                >
+                  <!-- img -->
+                  <img
+                    src="/public/images/trendingnft4.png"
+                    alt=""
+                    class="object-cover mb-2 w-full"
+                  />
+                  <!-- content-card -->
+                  <div class="flex flex-col px-3 space-y-2">
+                    <h6
+                      class="text-base font-bold text-neutral-900 dark:text-white"
+                    >
+                      Fantastic Alien
+                    </h6>
+                    <div class="flex items-center gap-2 mb-2">
+                      <img
+                        src="/public/images/nft-user-img3.png"
+                        alt="nft-user-img1"
+                        class="object-cover"
+                      />
+                      <span
+                        class="text-sm font-medium dark:text-[#d1d5db] text-neutral-600"
+                        >Watson Kristin</span
+                      >
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                      <span
+                        class="text-sm dark:text-[#d1d5db] font-medium text-neutral-600"
+                        >price:<span
+                          class="text-sm dark:text-white font-semibold text-neutral-900"
+                          >1.44 ETH</span
+                        >
+                      </span>
+                      <span class="text-sm font-semibold text-blue-500"
+                        >$4,224.96</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-5 mb-4">
+                      <div
+                        class="px-6 py-2 rounded-full text-neutral-500 border border-neutral-500 cursor-pointer font-medium hover:bg-neutral-500 hover:text-white hover:shadow transition-all duration-300 dark:text-[#d1d5db] dark:hover:bg-slate-400"
+                      >
+                        History
+                      </div>
+                      <div
+                        class="whitespace-nowrap px-4 py-2 rounded-full hover:shadow text-white border border-blue-500 bg-blue-500 cursor-pointer hover:bg-blue-600 transition-all duration-300"
+                      >
+                        Buy Now
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- trending nfts end-->
+
+            <!-- recent bid -->
+            <div class="bg-white rounded-lg p-4 dark:bg-[#273142]">
+              <!-- flex container select+title -->
+              <div class="flex items-center justify-between mb-4">
+                <h6 class="text-lg font-bold dark:text-white">Recent Bid</h6>
+                <select
+                  class="selectRecentBid border border-neutral-300 rounded-full px-3 py-3 text-neutral-900 text-sm dark:bg-[#273142] dark:text-white focus:border-blue-500"
+                >
+                  <option>All Items</option>
+                  <option>New Items</option>
+                  <option>Trending Item</option>
+                  <option>Old Items</option>
+                </select>
+              </div>
+              <!-- flex container select+title end -->
+              <!-- table -->
+              <div
+                class="overflow-hidden rounded-xl border border-neutral-100 dark:border-[#323d4e]"
+              >
+                <table class="w-full min-w-[800px]">
+                  <thead class="bg-slate-100 dark:bg-[#1b2431]">
+                    <tr class="text-left text-neutral-900 font-semibold">
+                      <th class="py-4 px-4 text-base dark:text-white">Items</th>
+                      <th class="py-4 px-4 dark:text-white">Price</th>
+                      <th class="py-4 px-4 dark:text-white">Your Offer</th>
+                      <th class="py-4 px-4 dark:text-white">Recent Offer</th>
+                      <th class="py-4 px-4 dark:text-white">Time Left</th>
+                      <th class="py-4 px-4 dark:text-white">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      class="border-b border-neutral-200 dark:border-b-[#323d4e]"
+                    >
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/recentbidtable1.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Spanky & Friends
+                          </h6>
+                          <span
+                            class="text-sm font-normal text-neutral-600 dark:text-[#d1d5db]"
+                            >Owned by ABC</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 dark:text-[#d1d5db]"
+                      >
+                        1.44 ETH
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/recentbidtable2.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            1.44.00 ETH
+                          </h6>
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        2h 5m 40s
+                      </td>
+                      <td class="py-2 px-4">
+                        <div class="flex items-center gap-3">
+                          <i
+                            class="ri-edit-line text-green-500 cursor-pointer text-xl"
+                          ></i>
+                          <i
+                            class="ri-delete-bin-line text-red-500 cursor-pointer text-xl"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr
+                      class="border-b border-neutral-200 dark:border-b-[#323d4e]"
+                    >
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel3.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Spanky & Friends
+                          </h6>
+                          <span
+                            class="text-sm font-normal text-neutral-600 dark:dark:text-[#d1d5db]"
+                            >Owned by ABC</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 dark:text-[#d1d5db]"
+                      >
+                        1.44 ETH
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel4.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            1.44.00 ETH
+                          </h6>
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        2h 5m 40s
+                      </td>
+                      <td class="py-2 px-4">
+                        <div class="flex items-center gap-3">
+                          <i
+                            class="ri-edit-line text-green-500 cursor-pointer text-xl"
+                          ></i>
+                          <i
+                            class="ri-delete-bin-line text-red-500 cursor-pointer text-xl"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr
+                      class="border-b border-neutral-200 dark:border-b-[#323d4e]"
+                    >
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel5.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Spanky & Friends
+                          </h6>
+                          <span
+                            class="text-sm font-normal text-neutral-600 dark:text-[#d1d5db]"
+                            >Owned by ABC</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 dark:text-[#d1d5db]"
+                      >
+                        1.44 ETH
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel6.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            1.44.00 ETH
+                          </h6>
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="py-2 px-4">
+                        <div class="flex items-center gap-3">
+                          <i
+                            class="ri-edit-line text-green-500 cursor-pointer text-xl"
+                          ></i>
+                          <i
+                            class="ri-delete-bin-line text-red-500 cursor-pointer text-xl"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr
+                      class="border-b border-neutral-200 dark:border-b-[#323d4e]"
+                    >
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel7.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Spanky & Friends
+                          </h6>
+                          <span
+                            class="text-sm font-normal text-neutral-600 dark:text-[#d1d5db]"
+                            >Owned by ABC</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 dark:text-[#d1d5db]"
+                      >
+                        1.44 ETH
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel8.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            1.44.00 ETH
+                          </h6>
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="py-2 px-4">
+                        <div class="flex items-center gap-3">
+                          <i
+                            class="ri-edit-line text-green-500 cursor-pointer text-xl"
+                          ></i>
+                          <i
+                            class="ri-delete-bin-line text-red-500 cursor-pointer text-xl"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr
+                      class="border-b border-neutral-200 dark:border-b-[#323d4e]"
+                    >
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel9.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Spanky & Friends
+                          </h6>
+                          <span
+                            class="text-sm font-normal text-neutral-600 dark:text-[#d1d5db]"
+                            >Owned by ABC</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 dark:text-[#d1d5db]"
+                      >
+                        1.44 ETH
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel10.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            1.44.00 ETH
+                          </h6>
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="py-2 px-4">
+                        <div class="flex items-center gap-3">
+                          <i
+                            class="ri-edit-line text-green-500 cursor-pointer text-xl"
+                          ></i>
+                          <i
+                            class="ri-delete-bin-line text-red-500 cursor-pointer text-xl"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr
+                      class="border-b border-neutral-200 dark:border-b-[#323d4e]"
+                    >
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel11.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Spanky & Friends
+                          </h6>
+                          <span
+                            class="text-sm font-normal text-neutral-600 dark:text-[#d1d5db]"
+                            >Owned by ABC</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 dark:dark:text-[#d1d5db]"
+                      >
+                        1.44 ETH
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/public/images/tabel12.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            1.44.00 ETH
+                          </h6>
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="py-2 px-4">
+                        <div class="flex items-center gap-3">
+                          <i
+                            class="ri-edit-line text-green-500 cursor-pointer text-xl"
+                          ></i>
+                          <i
+                            class="ri-delete-bin-line text-red-500 cursor-pointer text-xl"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr
+                      class="border-b border-neutral-200 dark:border-b-[#323d4e]"
+                    >
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/images/tabel13.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            Spanky & Friends
+                          </h6>
+                          <span
+                            class="text-sm font-normal text-neutral-600 dark:text-[#d1d5db]"
+                            >Owned by ABC</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 dark:text-[#d1d5db]"
+                      >
+                        1.44 ETH
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="flex items-center py-3 px-4 gap-3">
+                        <img
+                          src="/images/tabel14.png"
+                          alt=""
+                          class="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <h6
+                            class="text-base font-semibold text-neutral-900 dark:text-white"
+                          >
+                            1.44.00 ETH
+                          </h6>
+                        </div>
+                      </td>
+                      <td
+                        class="text-base font-semibold text-neutral-600 text-left px-4 dark:text-[#d1d5db]"
+                      >
+                        3.053 ETH
+                      </td>
+                      <td class="py-2 px-4">
+                        <div class="flex items-center gap-3">
+                          <i
+                            class="ri-edit-line text-green-500 cursor-pointer text-xl"
+                          ></i>
+                          <i
+                            class="ri-delete-bin-line text-red-500 cursor-pointer text-xl"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- table end -->
+            </div>
+            <!-- recent bid end -->
+          </div>
+          <!-- left end -->
+
+          <!-- right -->
+          <div class="w-full lg:w-[33%] flex flex-col gap-6">
+            <!-- eth  price -->
+            <div class="bg-white rounded-lg p-4 dark:bg-[#273142]">
+              <div class="flex items-center justify-between mb-4">
+                <h6 class="text-lg font-bold text-neutral-900 dark:text-white">
+                  ETH Price
+                </h6>
+                <select
+                  class="ethPriceSelect border border-neutral-200 rounded-full px-4 py-3 text-base dark:text-white dark:border-[#d1d5db33] focus:border-blue-500 dark:bg-[#273142]"
+                >
+                  <option value="select month">Select Month</option>
+                  <option value="november">November</option>
+                  <option value="desember">Desember</option>
+                  <option value="january">january</option>
+                  <option value="february">February</option>
+                  <option value="march">March</option>
+                  <option value="april">April</option>
+                  <option value="may">May</option>
+                  <option value="june">June</option>
+                  <option value="july">July</option>
+                  <option value="august">August</option>
+                  <option value="september">September</option>
+                </select>
+              </div>
+              <div
+                id="ethChart"
+                class="border-t border-t-neutral-300 dark:border-[#d1d5db33]"
+              ></div>
+            </div>
+            <!-- eth price end -->
+
+            <!-- statistic -->
+            <div class="bg-white rounded-lg p-4 dark:bg-[#273142]">
+              <div class="flex items-center justify-between">
+                <h6 class="text-lg font-bold text-neutral-900 dark:text-white">
+                  Statistics
+                </h6>
+                <div
+                  class="flex items-center gap-1 text-sky-600 cursor-pointer"
+                >
+                  <span>View All </span>
+                  <span><i class="ri-arrow-right-s-line"></i></span>
+                </div>
+              </div>
+              <!-- total art sold -->
+              <div
+                class="mt-4 border-t border-neutral-200 dark:border-[#d1d5db33]"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex flex-col gap-y-4 py-6">
+                    <h5
+                      class="font-semibold text-neutral-900 text-2xl dark:text-white"
+                    >
+                      145
+                    </h5>
+                    <span
+                      class="text-xl text-neutral-600 font-normal dark:text-[#d1d5db]"
+                      >Total Art Sold</span
+                    >
+                  </div>
+                  <div id="artSoldChart"></div>
+                </div>
+              </div>
+              <!-- total art end -->
+
+              <!-- total earning -->
+              <div class="">
+                <div class="flex items-center justify-between">
+                  <div class="flex flex-col gap-y-4 py-6">
+                    <h5
+                      class="font-semibold text-neutral-900 text-2xl dark:text-white"
+                    >
+                      750
+                    </h5>
+                    <span
+                      class="text-xl text-neutral-600 font-normal dark:text-[#d1d5db]"
+                      >Total Earnings</span
+                    >
+                  </div>
+                  <div id="earningsChart"></div>
+                </div>
+              </div>
+              <!-- total earning end -->
+            </div>
+            <!-- statistic end -->
+
+            <!-- featured creator 1 -->
+            <div class="bg-white rounded-lg p-4 dark:bg-[#273142]">
+              <div class="flex items-center justify-between">
+                <h6 class="text-lg font-bold text-neutral-900 dark:text-white">
+                  Featured Creators
+                </h6>
+                <div
+                  class="flex items-center gap-1 text-sky-600 cursor-pointer"
+                >
+                  <span>View All </span>
+                  <span><i class="ri-arrow-right-s-line"></i></span>
+                </div>
+              </div>
+              <div
+                class="mt-4 border-t border-neutral-200 dark:border-[#d1d5db33]"
+              >
+                <div
+                  class="flex flex-col flex-wrap lg:flex-row lg:items-center lg:justify-between"
+                >
+                  <div class="flex items-center gap-3 py-4">
+                    <img src="/images/recentbidtable1.png" alt="" />
+                    <div>
+                      <h6
+                        class="text-base font-semibold text-neutral-900 dark:text-white"
+                      >
+                        Theresa Webb
+                      </h6>
+                      <span
+                        class="text-sm dark:text-[#d1d5db] text-neutral-600 font-normal"
+                        >Owned by ABC</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="self-start lg:self-center rounded-full border border-sky-600 shadow px-6 py-2 cursor-pointer bg-white text-blue-500 font-medium text-base hover:bg-blue-600 hover:text-white transition-all duration-300 dark:bg-transparent dark:hover:bg-blue-500 dark:hover:text-white"
+                  >
+                    Follow
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-6">
+                <div
+                  class="bg-white shadow rounded-lg overflow-hidden dark:bg-[#273142] dark:shadow-[4px_8px_24px_0_rgba(182,182,182,0.2)]"
+                >
+                  <img
+                    src="/public/images/featured-creator1.png"
+                    alt=""
+                    class="object-cover w-full max-w-xs mx-auto"
+                  />
+                  <div class="flex flex-col gap-2 px-3 py-3">
+                    <h6 class="text-base font-bold dark:text-white">
+                      New Figures
+                    </h6>
+                    <div class="flex items-center gap-2">
+                      <i class="ri-btc-fill text-yellow-500 text-2xl"></i>
+                      <span
+                        class="text-sm font-medium text-neutral-600 dark:text-[#d1d5db]"
+                        >0.10 BTC</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="bg-white shadow rounded-lg overflow-hidden dark:bg-[#273142] dark:shadow-[4px_8px_24px_0_rgba(182,182,182,0.2)]"
+                >
+                  <img
+                    src="/images/featured-creator2.png"
+                    alt=""
+                    class="object-cover w-full max-w-xs mx-auto"
+                  />
+                  <div class="flex flex-col gap-2 px-3 py-3">
+                    <h6 class="text-base font-bold dark:text-white">
+                      Abstrac Girl
+                    </h6>
+                    <div class="flex items-center gap-2">
+                      <i class="ri-btc-fill text-yellow-500 text-2xl"></i>
+                      <span
+                        class="text-sm font-medium text-neutral-600 dark:text-[#d1d5db]"
+                        >0.10 BTC</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- featured creator 1  end-->
+
+            <!-- feature creator 2 -->
+            <div class="bg-white rounded-lg p-4 dark:bg-[#273142]">
+              <div class="flex items-center justify-between">
+                <h6 class="text-lg font-bold text-neutral-900 dark:text-white">
+                  Featured Creators
+                </h6>
+                <div
+                  class="flex items-center gap-1 text-sky-600 cursor-pointer"
+                >
+                  <span>View All </span>
+                  <span><i class="ri-arrow-right-s-line"></i></span>
+                </div>
+              </div>
+
+              <div
+                class="mt-4 border-t border-neutral-200 dark:border-[#d1d5db33]"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3 py-4">
+                    <img src="/public/images/creator-img1.png" alt="" />
+                    <div>
+                      <h6
+                        class="text-base font-semibold text-neutral-900 dark:text-white"
+                      >
+                        Theresa Webb
+                      </h6>
+                      <span
+                        class="text-sm dark:text-[#d1d5db] text-neutral-600 font-normal"
+                        >@wishon</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-full px-6 py-2 cursor-pointer bg-sky-600 shadow"
+                  >
+                    <span class="text-white font-medium text-base">Follow</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3 py-4">
+                    <img src="/images/recentbidtable2.png" alt="" />
+                    <div>
+                      <h6
+                        class="text-base font-semibold text-neutral-900 dark:text-white"
+                      >
+                        Arlene McCoy
+                      </h6>
+                      <span
+                        class="text-sm text-neutral-600 font-normal dark:text-[#d1d5db]"
+                        >@nemccoy</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-full px-6 py-2 cursor-pointer bg-sky-600 shadow"
+                  >
+                    <span class="text-white font-medium text-base">Follow</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3 py-4">
+                    <img src="/images/creator-img3.png" alt="" />
+                    <div>
+                      <h6
+                        class="text-base font-semibold text-neutral-900 dark:text-white"
+                      >
+                        Kathryn Murphy
+                      </h6>
+                      <span
+                        class="dark:text-[#d1d5db] text-sm text-neutral-600 font-normal"
+                        >@kathrynmur</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-full px-6 py-2 cursor-pointer bg-sky-600 shadow"
+                  >
+                    <span class="text-white font-medium text-base">Follow</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3 py-4">
+                    <img src="/public/images/creator-img4.png" alt="" />
+                    <div>
+                      <h6
+                        class="text-base font-semibold text-neutral-900 dark:text-white"
+                      >
+                        Marvin McKinney
+                      </h6>
+                      <span
+                        class="dark:text-[#d1d5db] text-sm text-neutral-600 font-normal"
+                        >@marvinckin</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-full px-6 py-2 cursor-pointer bg-sky-600 shadow"
+                  >
+                    <span class="text-white font-medium text-base">Follow</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3 py-4">
+                    <img src="/public/images/creator-img5.png" alt="" />
+                    <div>
+                      <h6
+                        class="text-base font-semibold text-neutral-900 dark:text-white"
+                      >
+                        Dianne Russell
+                      </h6>
+                      <span
+                        class="dark:text-[#d1d5db] text-sm text-neutral-600 font-normal"
+                        >@dinne_r</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-full px-6 py-2 cursor-pointer bg-sky-600 shadow"
+                  >
+                    <span class="text-white font-medium text-base">Follow</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- feature creator 2 end-->
+          </div>
+          <!-- right end  -->
+        </div>
+        <!-- wrapper end -->
+
+        <!-- footer -->
+        <div class="bg-white px-6 py-6 mt-6 dark:bg-[#273142]">
+          <div
+            class="flex flex-col gap-1 lg:flex-row lg:items-center lg:justify-between lg:gap-0"
+          >
+            <p class="text-neutral-600 text-base font-medium dark:text-white">
+              © 2024 WowDash. All Rights Reserved.
+            </p>
+            <p
+              class="text-neutral-600 text-base font-medium dark:text-[#d1d5db]"
+            >
+              Made by
+              <span class="text-blue-600 dark:text-blue-500">Fakhri Rizki</span>
+            </p>
+          </div>
+        </div>
       </div>
-      <!-- viemore -->
-      <div class="text-center mt-10 bg-[#3b2811] text-white rounded-full shadow  mx-auto w-[120px] px-4 py-2 ">view more
-      </div>
-   </div>
-   <!-- infograpichs-end -->
-   <!-- benefit -->
-   <section class="py-20 bg-[#817565]">
-      <div class="max-w-6xl mx-auto px-3 ">
-         <!-- judul -->
-         <h1 class="text-3xl font-bold text-center text-white uppercase mb-10">benefit</h1>
-         <!-- layout -->
-         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- isi card-1 -->
-            <div class="flex flex-col justify-center items-center bg-[#e7d9ca] p-5 rounded-xl shadow">
-               <!-- icon -->
-               <div class="mb-3"><i class="ri-calendar-line text-5xl text-[#3b2811]"></i></div>
-               <h3 class="text-center text-xl font-bold mb-3 text-[#3b2811]">Flexible Learning Schedule</h3>
-               <p class="text-center text-sm font-semibold mb-5 text-[#736d69]">Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Unde eveniet sequi sed magni odit quisquam. Illum sint corporis odio dolorum..</p>
-            </div>
-            <!-- isi-card-1 end -->
-            <!-- isi card-2 -->
-            <div class="flex flex-col justify-center items-center bg-[#e7d9ca] p-5 rounded-xl shadow">
-               <!-- icon -->
-               <div class="mb-3"><i class="ri-account-pin-box-line text-5xl text-[#3b2811]"></i></div>
-               <h3 class="text-center text-xl font-bold mb-3 text-[#3b2811]">expert-lead courses</h3>
-               <p class="text-center text-sm font-semibold mb-5 text-[#736d69]">Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Unde eveniet sequi sed magni odit quisquam. Illum sint corporis odio dolorum..</p>
-            </div>
-            <!-- isi card-2-end -->
-            <!-- isi card-3 -->
-            <div class="flex flex-col justify-center items-center bg-[#e7d9ca] p-5 rounded-xl shadow">
-               <!-- icon -->
-               <div class="mb-3"><i class="ri-book-open-fill text-5xl text-[#3b2811]"></i></div>
-               <h3 class="text-center text-xl font-bold mb-3 text-[#3b2811]">expert-lead courses</h3>
-               <p class="text-center text-sm font-semibold mb-5 text-[#736d69]">Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Unde eveniet sequi sed magni odit quisquam. Illum sint corporis odio dolorum..</p>
-            </div>
-            <!-- isi card-3-end -->
-            <!-- isi card-4 -->
-            <div class="flex flex-col justify-center items-center bg-[#e7d9ca] p-5 rounded-xl shadow">
-               <!-- icon -->
-               <div class="mb-3"><i class="ri-message-2-fill text-5xl text-[#3b2811]"></i></div>
-               <h3 class="text-center text-xl font-bold mb-3 text-[#3b2811]">expert-lead courses</h3>
-               <p class="text-center text-sm font-semibold mb-5 text-[#736d69]">Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Unde eveniet sequi sed magni odit quisquam. Illum sint corporis odio dolorum..</p>
-            </div>
-            <!-- isi card-4end -->
-         </div>
-         <!-- faq -->
-         <h1 class="font-bold text-3xl text-white mt-10 mb-10 text-center uppercase">frequently asked question</h1>
-         <div class="space-y-4">
-            <!-- faq-1 -->
-            <div class="faq-items rounded-xl  cursor-pointer p-3">
-               <!-- faq-question -->
-               <div class="faq-question flex justify-between items-center p-3 bg-transparent transition-all duration-300 hover:bg-[#F4E6DB]
-                  text-white hover:text-black border-1 border-sky-500 hover:border-2 hover:border-sky-600 ">
-                  <p class=" ">can I create an account on el-madkal</p>
-                  <i class="ri-arrow-up-wide-line text-xl toggle-icon"></i>
-               </div>
-               <!-- faq answer -->
-               <div class="faq answer mt-2 pt-2 px-1 border-b hidden text-white">
-                  <p class="mb-2">to create an individual accoun on madkal</p>
-               </div>
-            </div>
-            <!-- faq-1-end -->
-            <!-- faq-2 -->
-            <div class="faq-items rounded-xl sadow cursor-pointer p-3">
-               <!-- faq-question -->
-               <div class=" faq-question flex justify-between items-center p-3 bg-transparent transition-all duration-300 hover:bg-[#F4E6DB]
-                  text-white hover:text-black border-1 border-sky-500 hover:border-2 hover:border-sky-600">
-                  <p>is there many fee to register as an individual</p>
-                  <i class="ri-arrow-up-wide-line text-xl toggle-icon"></i>
-               </div>
-               <!-- faq answer -->
-               <div class="faq answer mt-2 pt-2 px-1 border-b hidden text-white">
-                  <p class="mb-2">to create an individual accoun on madkal</p>
-               </div>
-            </div>
-            <!-- faq-3 -->
-            <div class="faq-items rounded-xl sadow cursor-pointer p-3">
-               <!-- faq-question -->
-               <div class="faq-question flex justify-between items-center p-3 bg-transparent transition-all duration-300 hover:bg-[#F4E6DB]
-                  text-white hover:text-black border-1 border-sky-500 hover:border-2 hover:border-sky-600">
-                  <p>can I accesse my account and courses on multiple device</p>
-                  <i class="ri-arrow-up-wide-line text-xl toggle-icon transition-transform duration-300"></i>
-               </div>
-               <!-- faq answer -->
-               <div class="faq answer mt-2 pt-2 px-1 border-b hidden text-white">
-                  <p class="mb-2">to create an individual accoun on madkal</p>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- benefit-end -->
-   <!-- footer -->
-   <footer class="bg-[#79614f] text-white py-10">
-      <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-         <!-- courses -->
-         <div>
-            <h3 class="font-bold mb-4">courses</h3>
-            <ul>
-               <li><a href="">webinar</a></li>
-               <li><a href="">bootcamp</a></li>
-               <li><a href="">face to face</a></li>
-            </ul>
-         </div>
-         <!-- courses-end -->
-         <!-- about us -->
-         <div>
-            <h3 class="font-bold mb-4">about us</h3>
-            <ul>
-               <li><a href="">about </a></li>
-               <li><a href="">contact us</a></li>
-               <li><a href="">career</a></li>
-            </ul>
-         </div>
-         <!-- about us-end -->
-         <!-- other -->
-         <div>
-            <h3 class="font-bold mb-4">about us</h3>
-            <ul>
-               <li><a href="">about </a></li>
-               <li><a href="">contact us</a></li>
-               <li><a href="">career</a></li>
-            </ul>
-         </div>
-         <!-- other-end -->
-         <!-- app -->
-         <div class="flex flex-col item-start gap-4">
-            <h3>download app</h3>
-            <div class="flex items-center j gap-3 ">
-               <a href="" class="  bg-black/90 rounded-lg shadow text-center py-2 px-2  md:p-0">
-                  <i class="ri-google-play-line text-xl ">get in playstore</i></a>
-               <a href="" class=" bg-black/90 rounded-lg shadow text-center py-2 px-2 md:p-0">
-                  <i class="ri-apple-fill  text-xl  ">get in appstore</i></a>
-            </div>
-            <h3 class>follow us</h3>
-            <div class="flex  gap-3 text-xl">
-               <i class="ri-facebook-fill"></i>
-               <i class="ri-twitter-fill"></i>
-               <i class="ri-instagram-line"></i>
-               <i class="ri-youtube-fill"></i>
-            </div>
-         </div>
-         <!-- app-end -->
-      </div>
-      <hr class="text-black w-full mt-5 mb-5 shadow-lg">
-      <div class="text-center">&copy; 2023 by s-tradition.com</div>
-   </footer>
+      <!-- main end -->
+    </div>
+    <!-- container end-->
 
-
-   <script type="module" src="/src/js/app.js"></script>
-</body>
-
+    <script type="module" src="/src/js/app.js"></script>
+  </body>
 </html>
