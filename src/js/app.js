@@ -233,6 +233,5 @@ userBtn.onclick = function (e) {
 
 // klik diluar
 document.onclick = function () {
-  console.log("kena klik");
   closeMenus();
 };
